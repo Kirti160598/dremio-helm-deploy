@@ -27,10 +27,10 @@ spec:
     resources:
       limits:
         cpu: "2"
-        memory: "4Gi"
+        memory: "1Gi"
       requests:
         cpu: "1"
-        memory: "2Gi"
+        memory: "512Mi"
     tls:
       enabled: true
       secretName: dremio-cert
