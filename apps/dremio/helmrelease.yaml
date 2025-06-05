@@ -31,4 +31,7 @@ spec:
       requests:
         cpu: "1"
         memory: "2Gi"
+    tls:
+      enabled: true
+      secretName: dremio-cert
 
