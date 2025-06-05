@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dremio
+  namespace: dremio   # your target namespace, must exist in cluster
+spec:
+  interval: 5m          # how often Flux reconciles this release
+  chart:
+    spec:
+      chart: dremio      # name of the Helm chart
+      version: "23.0.0"  # chart version
+      sourceRef:
+        kind: HelmRepository  # type of source providing the chart
+        name: dremio-repo      # name of the HelmRepository resource
+        namespace: dremio     # must match HelmRepository's namespace
+  values:
+    image:
+      repository: dremio/dremio-oss
+      tag: "23.0.0"
+    service:
+      type: LoadBalancer
+      port: 9047
+    persistence:
+      enabled: true
+      size: 50Gi
+      storageClass: standard
+    resources:
+      limits:
+        cpu: "2"
+        memory: "4Gi"
+      requests:
+        cpu: "1"
+        memory: "2Gi"
+
